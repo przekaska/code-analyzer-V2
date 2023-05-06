@@ -34,6 +34,16 @@ std::string find_in(std::string text, std::string expression){
     return match[0];
 }
 
+int find_func_end(std::string &text){
+    int curly_level = 0;
+    for(char &ch : text){
+        curly_level += (ch == '{') - (ch == '}');
+        if(not curly_level)
+            return &ch - &text[0];
+    }
+    return -1;
+}
+
 int main(){
     std::string text; 
     readfile("test_files/testfile1.c", text);
