@@ -10,11 +10,13 @@
 struct Entry{
     const char* clss;
     std::string type;
+    int start;
+    int end;
     std::string code;
 };
 
-Entry make_entry(const char* clss, std::string type, std::string code = ""){
-    Entry entry = {clss, type, code};
+Entry make_entry(const char* clss, std::string type, int start, int end=-1, std::string code = ""){
+    Entry entry = {clss, type, start, end, code};
     return entry;
 }
 

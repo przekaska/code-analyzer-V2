@@ -22,13 +22,15 @@ int find_func_end(std::string &text){
 void find_funcs(std::string text){ 
     std::smatch match;
     std::regex func_decor_expr(DECOR_FUNC_REGEX);
+    int start = 0;
 
     while (regex_search(text, match, func_decor_expr)){ // TODO: split it into functions
+        start += match.position();
         std::string name = extract_from(match[0], NAME_DECOR_REGEX);
         std::string type = extract_from(match[0], TYPE_DECOR_REGEX);
-        symbol_table[name] = make_entry(FUNC_CLSS, type);
-        text = text.substr(match.position() + match.length());
+        symbol_table[name] = make_entry(FUNC_CLSS, type, start, find_func_end(text) + start + match.length());
         symbol_table[name].code = text.substr(1, find_func_end(text) - 2);
+        start += match.length();
     }
 }
 
