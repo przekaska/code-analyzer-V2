@@ -4,6 +4,9 @@
 #include <unordered_map>
 #include <string>
 
+#define FUNC_CLSS "FUNC"
+
+
 struct Entry{
     const char* clss;
     std::string type;

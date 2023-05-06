@@ -2,7 +2,7 @@
 #define _SIMPLE_TREE_CPP
 
 #include <list>
-#include <iostream>
+#include <string>
 
 
 class Node{

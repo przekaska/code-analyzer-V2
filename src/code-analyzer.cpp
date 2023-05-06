@@ -9,6 +9,7 @@
 
 #include "simple-tree.cpp"
 #include "functions.cpp"
+#include "symbol-table.cpp"
 
 
 void readfile(const char *filename, std::string &text_buffer){
@@ -25,12 +26,10 @@ int main(){
     std::string text; 
     readfile("test_files/testfile1.c", text);
     find_funcs(text);
-    for (Func func : funcs){
-        std::cout << "Name: " << func.name << std::endl;
-        std::cout << "Type: " << func.type << std::endl;
-        std::cout << func.code << std::endl;
-    }
-    std::cout << extract_from(text, PREPROC_REGEX) << std::endl;
+
+    std::cout << symbol_table["draw_player"]->clss << std::endl;
+    std::cout << symbol_table["draw_player"]->type << std::endl;
+    std::cout << symbol_table["draw_player"]->code << std::endl;
 }
 
 #endif

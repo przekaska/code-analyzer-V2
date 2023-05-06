@@ -21,12 +21,12 @@ int find_func_end(std::string &text){
 
 void find_funcs(std::string text){ 
     std::smatch match;
-    std::regex func_decor_expr(FUNC_DECOR_REGEX);
+    std::regex func_decor_expr(DECOR_FUNC_REGEX);
 
-    while (regex_search(text, match, func_decor_expr)){
-        std::string name = extract_from(match[0], DECOR_NAME_REGEX);
-        std::string type = extract_from(match[0], DECOR_TYPE_REGEX);
-        static Entry entry("func", type);
+    while (regex_search(text, match, func_decor_expr)){ // TODO: split it into functions
+        std::string name = extract_from(match[0], NAME_DECOR_REGEX);
+        std::string type = extract_from(match[0], TYPE_DECOR_REGEX);
+        static Entry entry(FUNC_CLSS, type);
         symbol_table[name] = &entry;
         text = text.substr(match.position() + match.length());
         symbol_table[name]->code = text.substr(1, find_func_end(text) - 2);
