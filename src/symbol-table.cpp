@@ -11,14 +11,15 @@ struct Entry{
     const char* clss;
     std::string type;
     std::string code;
-
-    Entry(const char* new_cls, std::string new_type){
-        clss = new_cls;
-        type = new_type;
-    }
 };
 
+Entry make_entry(const char* clss, std::string type, std::string code = ""){
+    Entry entry = {clss, type, code};
+    return entry;
+}
 
-std::unordered_map<std::string, Entry*> symbol_table;
+std::unordered_map<std::string, Entry> symbol_table;
+
+
 
 #endif

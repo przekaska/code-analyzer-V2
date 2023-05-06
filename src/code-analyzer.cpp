@@ -27,9 +27,9 @@ int main(){
     readfile("test_files/testfile1.c", text);
     find_funcs(text);
 
-    std::cout << symbol_table["draw_player"]->clss << std::endl;
-    std::cout << symbol_table["draw_player"]->type << std::endl;
-    std::cout << symbol_table["draw_player"]->code << std::endl;
+    std::cout << symbol_table["change_y"].clss << std::endl;
+    std::cout << symbol_table["change_y"].type << std::endl;
+    std::cout << symbol_table["change_y"].code << std::endl;
 }
 
 #endif

@@ -26,10 +26,9 @@ void find_funcs(std::string text){
     while (regex_search(text, match, func_decor_expr)){ // TODO: split it into functions
         std::string name = extract_from(match[0], NAME_DECOR_REGEX);
         std::string type = extract_from(match[0], TYPE_DECOR_REGEX);
-        static Entry entry(FUNC_CLSS, type);
-        symbol_table[name] = &entry;
+        symbol_table[name] = make_entry(FUNC_CLSS, type);
         text = text.substr(match.position() + match.length());
-        symbol_table[name]->code = text.substr(1, find_func_end(text) - 2);
+        symbol_table[name].code = text.substr(1, find_func_end(text) - 2);
     }
 }
 
