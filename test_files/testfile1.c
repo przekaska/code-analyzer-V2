@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "window.c"
 
-
 #define INIT_Y 20
 #define INIT_X 10
 
@@ -13,7 +12,7 @@
 
 
 
-void jump(struct Player *player){
+void jump(int *player){
     memset(player->moves, 1, MOVES_SIZE);
 
     player->is_standing = false;
@@ -22,8 +21,7 @@ void jump(struct Player *player){
     player->change_iterator = 0;
 }
 
-
-void change_y(struct Player *player){
+void change_y(int *player){
     player->move_iterator++;
     if(player->move_iterator > MOVES_SIZE){
         player->move_iterator = 0;
@@ -39,13 +37,13 @@ void change_y(struct Player *player){
 
 
 
-void reset_mv_buffer(struct Player *player){
+void reset_mv_buffer(int *player){
     memset(player->moves, 0, MOVES_SIZE);
     player->is_reset = true;
 }
 
 
-void draw_player(struct Player *player){
+void draw_player(int *player){
     mvaddch(WINDOW_HEIGHT - player->previous_y, INIT_X, player->bg_element_buffer);
     player->bg_element_buffer = mvwinch(stdscr, WINDOW_HEIGHT - player->y, INIT_X);    
     mvaddch(WINDOW_HEIGHT - player->y, INIT_X, player->skin + player->is_standing * 32);
