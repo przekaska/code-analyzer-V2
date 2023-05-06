@@ -4,12 +4,12 @@
 #define FUNC_DECOR_REGEX "(void|int|float)+(\\*)?\\s+(\\*)?\\w+(\\s+)?\\(((\\s?(void|int|float)+(\\*)?\\s+(\\*)?\\w+(\\s+)?,?\\s?)?)+\\)"
 #define DECOR_TYPE_REGEX "(void|int|float)"
 #define DECOR_NAME_REGEX "\\w+\\s?(?=\\()"
+#define PREPROC_REGEX "#.+"
 
 #include <string>
 #include <regex>
 
-
-std::string find_in(std::string text, std::string expression){
+std::string extract_from(std::string text, std::string expression){
     std::smatch match;
     std::regex expr(expression);
 
