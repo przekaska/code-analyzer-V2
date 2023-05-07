@@ -5,6 +5,9 @@
 #include <string>
 
 #define FUNC_CLSS "FUNC"
+#define VARB_CLSS "VARB"
+
+#define DEF_VAR_TYPE "DEF_VAR"
 
 
 struct Entry{
