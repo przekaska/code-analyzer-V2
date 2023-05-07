@@ -5,9 +5,10 @@
 #define TYPE_DECOR_REGEX "(void|int|float)"
 #define NAME_DECOR_REGEX "\\w+\\s?(?=\\()"
 #define PREPROC_REGEX "#.+"
-#define DEFINE_PREPROC_REGEX "#define.+"
+#define WORD_PREPROC_REGEX "#(\\s+)?\\w+"
 
 #include <string>
+#include <cctype>
 #include <regex>
 
 std::string extract_by_regex(std::string text, std::string expression){
@@ -26,6 +27,19 @@ bool search_by_regex(std::string text, std::string regex,
     result_buffer = match[0];
     position = match.position();
     return result;
+}
+
+std::string extract_nth_word(std::string text, int n){
+    int start = 0;
+    int length = 0;
+    while(text[start] != '\0'){
+        if(not n) break;
+        n -= (std::isspace(text[start]) and not std::isspace(text[start + 1])); 
+        start++;
+    }
+    while(not std::isspace(text[start + length]))
+        length++;
+    return text.substr(start, length);
 }
 
 
