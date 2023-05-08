@@ -10,6 +10,7 @@
 #include "simple-tree.cpp"
 #include "functions.cpp"
 #include "symbol-table.cpp"
+#include "preprocess.cpp"
 
 
 void readfile(const char *filename, std::string &text_buffer){
@@ -25,13 +26,19 @@ void readfile(const char *filename, std::string &text_buffer){
 int main(){
     std::string text; 
     readfile("test_files/testfile1.c", text);
+    preproc(text);  
     find_funcs(text);
 
-    std::cout << symbol_table["jump"].clss << std::endl;
-    std::cout << symbol_table["jump"].type << std::endl;
-    std::cout << symbol_table["jump"].code << std::endl;
-    for(int i = 0; i < 20; i++)
-        std::cout << text[symbol_table["jump"].end - 20 + i];
+    // std::cout << symbol_table["jump"].clss << std::endl;
+    // std::cout << symbol_table["jump"].type << std::endl;
+    // std::cout << symbol_table["jump"].code << std::endl;
+    // for(int i = 0; i < 20; i++)
+    //     std::cout << text[symbol_table["jump"].end - 20 + i];
+    // for(int i = 1; i < 2; i++)
+    for(auto sth : symbol_table){
+        std::cout << sth.first << " : " << sth.second.clss << " " << sth.second.type << std::endl;
+        std::cout << sth.second.code << std::endl; 
+    }
 }
 
 #endif
