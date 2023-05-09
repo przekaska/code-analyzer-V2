@@ -1,11 +1,11 @@
 #ifndef _R_EXPRESSIONS_CPP
 #define _R_EXPRESSIONS_CPP
 
-#define DECOR_FUNC_REGEX "(void|int|float)+(\\*)?\\s+(\\*)?\\w+(\\s+)?\\(((\\s?(void|int|float)+(\\*)?\\s+(\\*)?\\w+(\\s+)?,?\\s?)?)+\\)"
+#define DECOR_FUNC_REGEX "(void|int|float)+(\\*)?\\s+(\\*)?\\w+\\s*\\(((\\s*(void|int|float)+(\\*)?\\s+(\\*)?\\w+\\s*,?\\s*)?)+\\)"
 #define TYPE_DECOR_REGEX "(void|int|float)"
-#define NAME_DECOR_REGEX "\\w+\\s?(?=\\()"
+#define NAME_DECOR_REGEX "\\w+\\s*(?=\\()"
 #define PREPROC_REGEX "#.+"
-#define WORD_PREPROC_REGEX "#(\\s+)?\\w+"
+#define WORD_PREPROC_REGEX "#\\s*\\w+"
 
 #include <string>
 #include <cctype>
