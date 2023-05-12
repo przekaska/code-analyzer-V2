@@ -2,28 +2,35 @@
 #define _SCOPES_CPP
 
 #include <string>
+#include <iostream>
+#include <vector>
 
 #include "r-expressions.cpp"
-#include <iostream>
+#include "symbol-table.cpp"
 
-// start from scopes
+
+std::vector<int> sth;
 void find_scopes(std::string text){
     std::string scope_declar;
-    int position;
-    while (search_by_regex(text, SCOPE_FINDING_REGEX, scope_declar, position)){
+    int start;
+    int removed_chars = 0;
+    /* this code looks awful but works, going to change it*/
+    while (search_by_regex(text, SCOPE_FINDING_REGEX, scope_declar, start)){
         int cur_brack_lvl = 0;
-        int brack_lvl = 0;
-        int i = position;
-        while(text[i]){
-            if(text[i] == ';' and not brack_lvl and not cur_brack_lvl)
+        int parenthesis_level = 0;
+        int stop = start;
+        while(text[stop]){
+            if(text[stop] == ';' and not parenthesis_level and not cur_brack_lvl)
                 break;
-            else if(text[i] == '}' and not brack_lvl and cur_brack_lvl == 1)
+            else if(text[stop] == '}' and not parenthesis_level and cur_brack_lvl == 1)
                 break;
-            cur_brack_lvl += (text[i] == '{') - (text[i] == '}');
-            brack_lvl += (text[i] == '(') - (text[i] == ')');
-            i++;
+            cur_brack_lvl += (text[stop] == '{') - (text[stop] == '}');
+            parenthesis_level += (text[stop] == '(') - (text[stop] == ')');
+            stop++;
         }
-        text = text.substr(position + scope_declar.size());
+        symbol_table[std::to_string(start + removed_chars)] = make_entry(SCOPE_CLSS, "", start + removed_chars, stop + removed_chars);
+        text = text.substr(start + scope_declar.size());
+        removed_chars += scope_declar.size() + start;
     }
 }
 

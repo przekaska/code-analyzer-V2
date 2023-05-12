@@ -6,9 +6,9 @@
 
 #define FUNC_CLSS "FUNC"
 #define VAR_CLSS "VARB"
+#define SCOPE_CLSS "SCOPE"
 
 #define DEFINED_VAR_T "DEF_VAR"
-
 
 struct Entry{
     const char* clss;

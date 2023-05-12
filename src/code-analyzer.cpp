@@ -11,7 +11,7 @@
 #include "functions.cpp"
 #include "symbol-table.cpp"
 #include "preprocess.cpp"
-
+#include "scopes.cpp"
 
 void readfile(const char *filename, std::string &text_buffer){
     std::ifstream source_file(filename);
@@ -26,8 +26,16 @@ void readfile(const char *filename, std::string &text_buffer){
 int main(){
     std::string text; 
     readfile("test_files/testfile1.c", text);
-    preproc(text);  
-    find_funcs(text);
+    // preproc(text);  
+    // find_funcs(text);
+    find_scopes(text);
+
+    // for(int num : sth){
+    //     for(int i = num; i < num + 20; i++){
+    //         std::cout << text[i];
+    //     }
+    //     std::cout << std::endl << "DUPA" << std::endl;
+    // }
 
     // std::cout << symbol_table["jump"].clss << std::endl;
     // std::cout << symbol_table["jump"].type << std::endl;

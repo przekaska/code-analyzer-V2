@@ -1,11 +1,14 @@
 #ifndef _R_EXPRESSIONS_CPP
 #define _R_EXPRESSIONS_CPP
 
-#define DECOR_FUNC_REGEX "(void|int|float)+(\\*)?\\s+(\\*)?\\w+\\s*\\(((\\s*(void|int|float)+(\\*)?\\s+(\\*)?\\w+\\s*,?\\s*)?)+\\)"
+#define DECOR_FUNC_REGEX "(void|int|float)\\s+\\w+\\((\\w|\\W)*?(?=\\{)"
 #define TYPE_DECOR_REGEX "(void|int|float)"
 #define NAME_DECOR_REGEX "\\w+\\s*(?=\\()"
 #define PREPROC_REGEX "#.+"
 #define WORD_PREPROC_REGEX "#\\s*\\w+"
+#define PSEUDO_FUNC_REGEX "(if|for|while|do)"
+
+#define SCOPE_FINDING_REGEX "\\b(if|for|while|do)\\s*\\(|(void|int|float)\\s+\\w+\\((\\w|\\W)*?(?=\\{)"
 
 #include <string>
 #include <cctype>
@@ -29,8 +32,7 @@ bool search_by_regex(std::string text, std::string regex,
     return result;
 }
 
-std::string extract_nth_word(std::string text, int n){
-    int start = 0;
+std::string extract_nth_word(std::string text, int n, int start = 0){
     int length = 0;
     while(text[start] != '\0'){
         if(not n) break;
